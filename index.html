@@ -3,507 +3,304 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Cours particuliers — Bilal</title>
-  <meta name="description" content="Cours particuliers (Solvay-style) : finance, maths, stats, compta. Réserve un cours." />
-
-  <style>
-    :root{
-      /* Couleurs officielles (SBS-EM / ULB) */
-      --ulb-blue:#004B93;
-      --sbs-orange:#F7A823;
-
-      /* Neutres */
-      --bg:#050B16;
-      --bg2:#07132A;
-      --card: rgba(255,255,255,.06);
-      --border: rgba(255,255,255,.14);
-      --text:#F4F7FF;
-      --muted:#B9C7E6;
-
-      --radius: 18px;
-      --shadow: 0 20px 60px rgba(0,0,0,.35);
-      --max: 1080px;
-    }
-
-    *{box-sizing:border-box}
-    html{scroll-behavior:smooth}
-    body{
-      margin:0;
-      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Apple Color Emoji","Segoe UI Emoji";
-      color:var(--text);
-      background:
-        radial-gradient(900px 500px at 10% 0%, rgba(0,75,147,.45), transparent 60%),
-        radial-gradient(900px 500px at 90% 10%, rgba(247,168,35,.28), transparent 60%),
-        linear-gradient(180deg, var(--bg), var(--bg2));
-      min-height:100vh;
-    }
-
-    /* motif discret */
-    body::before{
-      content:"";
-      position:fixed; inset:0;
-      background-image:
-        radial-gradient(circle at 1px 1px, rgba(255,255,255,.08) 1px, transparent 0);
-      background-size: 22px 22px;
-      opacity:.18;
-      pointer-events:none;
-    }
-
-    a{color:inherit}
-    .container{
-      width:min(var(--max), 92vw);
-      margin:0 auto;
-      position:relative;
-    }
-
-    /* Header */
-    header{
-      position:sticky; top:0; z-index:20;
-      backdrop-filter: blur(12px);
-      background: rgba(5,11,22,.55);
-      border-bottom: 1px solid rgba(255,255,255,.08);
-    }
-    .topbar{
-      display:flex; align-items:center; justify-content:space-between;
-      padding:14px 0;
-      gap:12px;
-    }
-    .brand{
-      display:flex; align-items:center; gap:10px;
-      font-weight:800; letter-spacing:.2px;
-    }
-    .dot{
-      width:12px; height:12px; border-radius:999px;
-      background: linear-gradient(135deg, var(--sbs-orange), #ffd08a);
-      box-shadow: 0 0 0 5px rgba(247,168,35,.16);
-    }
-    nav{display:flex; gap:14px; flex-wrap:wrap; align-items:center}
-    nav a{
-      text-decoration:none;
-      color:rgba(244,247,255,.92);
-      font-weight:600;
-      font-size:14px;
-      padding:8px 10px;
-      border-radius:12px;
-    }
-    nav a:hover{background: rgba(255,255,255,.06)}
-
-    /* Buttons */
-    .btn{
-      display:inline-flex; align-items:center; justify-content:center;
-      gap:8px;
-      padding:12px 14px;
-      border-radius:14px;
-      border:1px solid var(--border);
-      background: rgba(255,255,255,.06);
-      color:var(--text);
-      text-decoration:none;
-      font-weight:800;
-      cursor:pointer;
-      box-shadow: 0 10px 30px rgba(0,0,0,.18);
-      transition: transform .08s ease, background .15s ease, border-color .15s ease;
-      user-select:none;
-    }
-    .btn:hover{background: rgba(255,255,255,.10)}
-    .btn:active{transform: translateY(1px)}
-
-    .btn.primary{
-      background: linear-gradient(135deg, var(--sbs-orange), #ffd08a);
-      color:#1a1205;
-      border-color: rgba(255,255,255,.0);
-    }
-    .btn.primary:hover{filter:saturate(1.05)}
-    .btn.ghost{
-      background: transparent;
-      border-color: rgba(255,255,255,.18);
-    }
-
-    /* Hero */
-    .hero{
-      padding:52px 0 22px;
-      display:grid;
-      grid-template-columns: 1.25fr .75fr;
-      gap:18px;
-      align-items:stretch;
-    }
-    .heroCard{
-      border:1px solid rgba(255,255,255,.12);
-      background: linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.04));
-      border-radius: var(--radius);
-      padding:22px;
-      box-shadow: var(--shadow);
-      overflow:hidden;
-      position:relative;
-    }
-    .badge{
-      display:inline-flex;
-      gap:8px; align-items:center;
-      padding:8px 12px;
-      border-radius:999px;
-      border:1px solid rgba(255,255,255,.14);
-      background: rgba(0,75,147,.22);
-      color:rgba(244,247,255,.95);
-      font-weight:700;
-      font-size:13px;
-    }
-    .badge b{color:var(--sbs-orange)}
-    h1{
-      margin:14px 0 10px;
-      font-size: clamp(30px, 4vw, 46px);
-      line-height:1.08;
-    }
-    .lead{
-      margin:0;
-      color: var(--muted);
-      font-size: 16px;
-      line-height:1.55;
-      max-width: 68ch;
-    }
-    .heroActions{
-      display:flex; gap:10px; flex-wrap:wrap;
-      margin-top:16px;
-    }
-
-    .sideCard{
-      border:1px solid rgba(255,255,255,.12);
-      background: rgba(255,255,255,.05);
-      border-radius: var(--radius);
-      padding:18px;
-      box-shadow: var(--shadow);
-      display:flex;
-      flex-direction:column;
-      justify-content:space-between;
-      gap:12px;
-    }
-    .sideTitle{
-      font-weight:900;
-      font-size:14px;
-      letter-spacing:.2px;
-      color: rgba(244,247,255,.92);
-    }
-    .sideList{
-      margin:8px 0 0;
-      padding-left:16px;
-      color: var(--muted);
-      line-height:1.6;
-      font-size:14px;
-    }
-
-    /* Sections */
-    section{padding:18px 0}
-    .grid{
-      display:grid;
-      grid-template-columns: repeat(12, 1fr);
-      gap:14px;
-    }
-    .card{
-      grid-column: span 6;
-      border:1px solid rgba(255,255,255,.12);
-      background: rgba(255,255,255,.05);
-      border-radius: var(--radius);
-      padding:18px;
-      box-shadow: 0 14px 40px rgba(0,0,0,.22);
-    }
-    .card h2{
-      margin:0 0 10px;
-      font-size:18px;
-      letter-spacing:.2px;
-    }
-    .muted{color: var(--muted)}
-    .chips{
-      display:flex; flex-wrap:wrap; gap:8px;
-      margin-top:10px;
-    }
-    .chip{
-      font-size:13px;
-      padding:7px 10px;
-      border-radius:999px;
-      border:1px solid rgba(255,255,255,.14);
-      background: rgba(255,255,255,.04);
-    }
-    .chip strong{color:var(--sbs-orange)}
-
-    .pricing{
-      grid-column: span 12;
-      display:grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap:14px;
-    }
-    .priceCard{
-      border:1px solid rgba(255,255,255,.12);
-      background: linear-gradient(180deg, rgba(0,75,147,.14), rgba(255,255,255,.05));
-      border-radius: var(--radius);
-      padding:18px;
-      box-shadow: 0 14px 40px rgba(0,0,0,.22);
-      position:relative;
-      overflow:hidden;
-    }
-    .priceCard::after{
-      content:"";
-      position:absolute; inset:-40px -40px auto auto;
-      width:180px; height:180px;
-      background: radial-gradient(circle at 30% 30%, rgba(247,168,35,.55), transparent 60%);
-      transform: rotate(12deg);
-      opacity:.9;
-      pointer-events:none;
-    }
-    .priceTitle{font-weight:900}
-    .price{
-      font-size:34px;
-      font-weight:950;
-      margin:8px 0 4px;
-    }
-    .price small{
-      font-size:14px;
-      color: var(--muted);
-      font-weight:700;
-    }
-    .priceList{
-      margin:10px 0 0;
-      padding-left:16px;
-      color: var(--muted);
-      line-height:1.6;
-      font-size:14px;
-    }
-
-    /* Contact */
-    form{
-      display:grid;
-      gap:10px;
-      margin-top:10px;
-    }
-    input, textarea{
-      width:100%;
-      padding:12px 12px;
-      border-radius:14px;
-      border:1px solid rgba(255,255,255,.14);
-      background: rgba(255,255,255,.04);
-      color: var(--text);
-      outline: none;
-    }
-    input:focus, textarea:focus{
-      border-color: rgba(247,168,35,.55);
-      box-shadow: 0 0 0 4px rgba(247,168,35,.12);
-    }
-
-    footer{
-      padding:28px 0 40px;
-      color: rgba(185,199,230,.9);
-      font-size:14px;
-    }
-
-    /* Responsive */
-    @media (max-width: 860px){
-      .hero{grid-template-columns: 1fr}
-      .card{grid-column: span 12}
-      .pricing{grid-template-columns: 1fr}
-      nav{display:none} /* simple pour commencer */
-    }
-    @media (prefers-reduced-motion: reduce){
-      html{scroll-behavior:auto}
-      .btn{transition:none}
-    }
-  </style>
+  <title>BCWbruxelles — Soutien scolaire (secondaire & supérieur)</title>
+  <meta name="description" content="BCWbruxelles : cours particuliers, aide aux devoirs, préparation examens. Secondaire + supérieur (université & haute école). En ligne, à domicile ou en locaux." />
+  <link rel="stylesheet" href="styles.css" />
 </head>
-
 <body>
-  <header>
-    <div class="container topbar">
-      <div class="brand">
-        <span class="dot" aria-hidden="true"></span>
-        <span>Cours particuliers</span>
+
+<header>
+  <div class="container navbar">
+    <a class="brand" href="index.html">
+      <div class="brand-logo" aria-label="Logo BCWbruxelles">
+        <!-- ✅ VOTRE LOGO (mettez votre fichier ici) -->
+        <img src="assets/logo-bcw.png" alt="Logo BCWbruxelles"
+             onerror="this.style.display='none'; this.parentElement.innerHTML='<span class=&quot;pill orange&quot;>BCW</span>';">
+      </div>
+      <div class="brand-title">
+        <strong>BCWbruxelles</strong>
+        <span>Secondaire • Université • Haute école</span>
+      </div>
+    </a>
+
+    <nav>
+      <button class="burger" aria-label="Ouvrir le menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <ul>
+        <li><a class="link" href="#offres">Offres</a></li>
+        <li><a class="link" href="#matieres">Matières</a></li>
+        <li><a class="link" href="#equipe">Équipe</a></li>
+        <li><a class="link" href="contact.html">Contact</a></li>
+        <li><a class="btn" href="inscription.html">S’inscrire</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="container hero-wrap">
+    <div>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center">
+        <span class="pill">Bruxelles • En ligne • À domicile</span>
+        <span class="pill orange">Réponse rapide</span>
       </div>
 
-      <nav aria-label="Navigation">
-        <a href="#services">Matières</a>
-        <a href="#tarifs">Tarifs</a>
-        <a href="#method">Méthode</a>
-        <a href="#contact">Contact</a>
-      </nav>
-
-      <a class="btn primary" href="#contact">Réserver un cours</a>
-    </div>
-  </header>
-
-  <main class="container">
-    <section class="hero">
-      <div class="heroCard">
-        <div class="badge">Palette style <b>SBS / ULB</b> • Bruxelles</div>
-        <h1>Aide pour réussir tes examens<br/>en finance, stats & compta.</h1>
-        <p class="lead">
-          Cours particuliers clairs et structurés : explications + exercices corrigés + méthode.
-          En ligne ou en présentiel à Bruxelles.
-        </p>
-
-        <div class="heroActions">
-          <a class="btn primary" href="#contact">Demander un cours</a>
-          <a class="btn ghost" href="#tarifs">Voir les tarifs</a>
-          <!-- Remplace par ton numéro (format international) -->
-          <a class="btn" href="https://wa.me/32XXXXXXXXX" target="_blank" rel="noreferrer">WhatsApp</a>
-        </div>
-
-        <p class="muted" style="margin-top:14px">
-          ✱ Remplace les textes / liens (WhatsApp, email, horaires) par les tiens.
-        </p>
-      </div>
-
-      <aside class="sideCard">
-        <div>
-          <div class="sideTitle">Ce que tu obtiens</div>
-          <ul class="sideList">
-            <li>Plan de révision personnalisé</li>
-            <li>Exercices type examen</li>
-            <li>Fiches synthèse + méthode</li>
-            <li>Suivi entre les cours (option)</li>
-          </ul>
-        </div>
-        <div>
-          <div class="sideTitle">Disponibilités</div>
-          <p class="muted" style="margin:8px 0 12px">
-            Ajoute ici ton lien de réservation (Calendly, Google Calendar, etc.)
-          </p>
-          <a class="btn" href="#contact">Me contacter</a>
-        </div>
-      </aside>
-    </section>
-
-    <section id="services">
-      <div class="grid">
-        <div class="card">
-          <h2>Matières</h2>
-          <p class="muted">Choisis ce dont tu as besoin (tu peux adapter la liste).</p>
-          <div class="chips">
-            <span class="chip"><strong>Stats</strong> & Probabilités</span>
-            <span class="chip"><strong>Maths</strong> (analyse / algèbre)</span>
-            <span class="chip"><strong>Compta</strong> (bases → avancé)</span>
-            <span class="chip"><strong>Finance</strong> (NPV, CAPM…)</span>
-            <span class="chip"><strong>Micro</strong> / Macro</span>
-            <span class="chip">Excel / exercices</span>
-          </div>
-        </div>
-
-        <div class="card">
-          <h2>Format</h2>
-          <p class="muted">
-            Cours 1h / 1h30 / 2h — en visio ou présentiel.
-            Objectif : comprendre vite + s’entraîner comme à l’examen.
-          </p>
-          <div class="chips">
-            <span class="chip">Explications simples</span>
-            <span class="chip">Exos corrigés</span>
-            <span class="chip">Méthode “pas à pas”</span>
-            <span class="chip">Plan de révision</span>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="tarifs">
-      <div class="pricing">
-        <div class="priceCard">
-          <div class="priceTitle">Essentiel</div>
-          <div class="price">30€ <small>/ heure</small></div>
-          <ul class="priceList">
-            <li>1h de cours</li>
-            <li>Exercices ciblés</li>
-            <li>Corrections en direct</li>
-          </ul>
-        </div>
-
-        <div class="priceCard">
-          <div class="priceTitle">Focus examen</div>
-          <div class="price">45€ <small>/ 1h30</small></div>
-          <ul class="priceList">
-            <li>Sujets type examen</li>
-            <li>Méthode + pièges fréquents</li>
-            <li>Mini plan de révision</li>
-          </ul>
-        </div>
-
-        <div class="priceCard">
-          <div class="priceTitle">Pack</div>
-          <div class="price">120€ <small>/ 4h</small></div>
-          <ul class="priceList">
-            <li>4h (1h ou 2h)</li>
-            <li>Suivi entre séances (option)</li>
-            <li>Réduction pack</li>
-          </ul>
-        </div>
-      </div>
-
-      <p class="muted" style="margin-top:12px">
-        ✱ Change les prix si tu veux. Tu peux aussi ajouter “tarif étudiant”, “groupe”, etc.
+      <h1 class="h1">Soutien scolaire efficace, avec une méthode claire.</h1>
+      <p class="lead">
+        On aide les élèves du <b>secondaire</b> et les étudiants en <b>supérieur</b> (univ / haute école)
+        à comprendre, s’organiser et réussir : devoirs, examens, rattrapage, méthode.
       </p>
-    </section>
 
-    <section id="method">
-      <div class="grid">
-        <div class="card">
-          <h2>Méthode (simple)</h2>
-          <ol class="muted" style="line-height:1.7; padding-left:18px; margin:0">
-            <li>On identifie la matière + ton niveau</li>
-            <li>On fait 2–3 exercices type examen</li>
-            <li>Je te donne la méthode “réutilisable”</li>
-            <li>Tu repars avec une mini-fiche / plan</li>
-          </ol>
-        </div>
-        <div class="card">
-          <h2>Pour qui ?</h2>
-          <p class="muted" style="margin:0; line-height:1.7">
-            Étudiants bac/master, rattrapages, remise à niveau, préparation d’examens.
-            Je peux aussi aider à organiser tes révisions (planning + priorités).
-          </p>
+      <div class="hero-actions">
+        <a class="btn" href="inscription.html">S’inscrire / Demander un devis</a>
+        <a class="btn secondary" href="#offres">Voir les offres</a>
+      </div>
+
+      <div class="kpis">
+        <div class="kpi"><strong>Secondaire</strong><span>Aide aux devoirs & examens</span></div>
+        <div class="kpi"><strong>Supérieur</strong><span>Univ & haute école</span></div>
+        <div class="kpi"><strong>Formats</strong><span>Online • domicile • locaux</span></div>
+        <div class="kpi"><strong>Suivi</strong><span>Plan + exercices ciblés</span></div>
+      </div>
+    </div>
+
+    <div class="hero-card">
+      <div style="display:flex;align-items:center;justify-content:space-between;gap:12px">
+        <h3 style="margin:0">BCWbruxelles</h3>
+
+        <!-- ✅ OPTIONNEL : logo Solvay Brussels School (si vous êtes ok niveau droit d’usage) -->
+        <div style="display:flex;align-items:center;gap:10px">
+          <span class="tag blue">Diplômés SBS</span>
+          <!-- Placez l’image fournie ici : assets/sbs-logo.png -->
+          <img src="assets/sbs-logo.png" alt="Solvay Brussels School" style="width:44px;height:44px;border-radius:14px;border:1px solid var(--border)"
+               onerror="this.style.display='none'">
         </div>
       </div>
-    </section>
 
-    <section id="contact">
-      <div class="grid">
-        <div class="card" style="grid-column: span 12;">
-          <h2>Contact</h2>
-          <p class="muted">
-            Remplis ce mini-formulaire (pour l’instant c’est une simulation côté navigateur).
-            Pour un “vrai” envoi + inscriptions, on branchera une base de données (Supabase/Firebase).
-          </p>
+      <p style="margin:10px 0 0;color:var(--muted);font-weight:700">
+        3 membres (Bilal, Sami, Walid). Expérience : tutorat, secondaire, cours privés, agrégation.
+        On s’adapte à votre besoin et on délègue si la demande augmente.
+      </p>
 
-          <form id="contactForm">
-            <input name="name" placeholder="Ton nom" required />
-            <input name="email" type="email" placeholder="Ton email" required />
-            <textarea name="message" rows="5" placeholder="Ce que tu veux travailler + date examen" required></textarea>
+      <div class="callout" style="margin-top:14px;">
+        <strong>Groupes (collab La Source)</strong><br>
+        <span style="font-weight:800">200€ / mois</span> — 2h × 2/semaine (≈16h/mois), 8–10 personnes.
+      </div>
 
-            <div style="display:flex; gap:10px; flex-wrap:wrap">
-              <button class="btn primary" type="submit">Envoyer</button>
-              <!-- Remplace par ton email -->
-              <a class="btn" href="mailto:ton.email@exemple.com">Envoyer par email</a>
-            </div>
+      <div class="meta">
+        <span class="tag orange">Objectif examen</span>
+        <span class="tag blue">Méthodo</span>
+        <span class="tag">Rattrapage</span>
+        <span class="tag">Confiance</span>
+      </div>
+    </div>
+  </div>
+</section>
 
-            <p class="muted" id="status" role="status" aria-live="polite" style="margin:6px 0 0;"></p>
-          </form>
+<section class="section" id="offres">
+  <div class="container">
+    <h2>Offres</h2>
+    <p>Choisis un format. Pour les cours particuliers, on fait un <b>devis personnalisé</b> (selon niveau, matière, fréquence, lieu).</p>
+
+    <div class="grid-3">
+      <div class="card highlight">
+        <h3>Groupes — La Source</h3>
+        <p>Rythme régulier, progression continue, entraide + exercices.</p>
+        <div class="price"><strong>200€</strong><span>/ mois</span></div>
+        <div class="meta">
+          <span class="tag orange">8–10 personnes</span>
+          <span class="tag">2h × 2 / semaine</span>
+          <span class="tag blue">≈16h / mois</span>
         </div>
       </div>
-    </section>
 
-    <footer>
-      <div class="container">
-        <div style="display:flex; gap:10px; flex-wrap:wrap; align-items:center; justify-content:space-between">
-          <small>© <span id="year"></span> — Cours particuliers</small>
-          <small class="muted">Design: Bleu ULB + Orange SBS (inspiration couleur)</small>
+      <div class="card">
+        <h3>Cours particuliers</h3>
+        <p>Sur mesure (secondaire & supérieur). Online, domicile ou locaux si dispo.</p>
+        <div class="meta">
+          <span class="tag blue">Devis personnalisé</span>
+          <span class="tag">Prépa examen</span>
+          <span class="tag">Coaching méthode</span>
         </div>
       </div>
-    </footer>
-  </main>
 
-  <script>
-    document.getElementById("year").textContent = new Date().getFullYear();
+      <div class="card">
+        <h3>Aide aux devoirs</h3>
+        <p>Organisation, régularité, compréhension, reprise de confiance.</p>
+        <div class="meta">
+          <span class="tag">Secondaire</span>
+          <span class="tag orange">Plan de travail</span>
+          <span class="tag">Suivi</span>
+        </div>
+      </div>
+    </div>
 
-    // Simulation : on affiche un message au lieu d'envoyer (pas de backend pour l'instant)
-    const form = document.getElementById("contactForm");
-    const statusEl = document.getElementById("status");
-    form.addEventListener("submit", (e) => {
-      e.preventDefault();
-      statusEl.textContent = "✅ Message enregistré (simulation). Prochaine étape : envoi réel + espace membre.";
-      form.reset();
-    });
-  </script>
+    <div class="split" style="margin-top:16px;">
+      <div class="card">
+        <h3>Comment ça marche ?</h3>
+        <p style="font-weight:750;color:var(--muted)">
+          1) Inscription (2 minutes)<br>
+          2) On vous contacte (objectif + dispo)<br>
+          3) On propose format + devis si besoin<br>
+          4) Démarrage + suivi
+        </p>
+      </div>
+
+      <div class="card">
+        <h3>Vous avez un gros objectif ?</h3>
+        <p>Examen, rattrapage, mémoire, partiels… On construit un plan + exercices ciblés.</p>
+        <div style="margin-top:12px">
+          <a class="btn blue" href="inscription.html">Démarrer maintenant</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="matieres" style="background:var(--soft);border-top:1px solid var(--border);border-bottom:1px solid var(--border);">
+  <div class="container">
+    <h2>Matières</h2>
+    <p>
+      On peut aider sur <b>tout</b> (et déléguer si la demande augmente).
+      Indique la matière et le niveau dans l’inscription.
+    </p>
+
+    <div class="grid-3">
+      <div class="card">
+        <h3>Secondaire</h3>
+        <p>Math • Sciences • Français • Langues • Histoire • Géographie • Méthode</p>
+        <div class="meta">
+          <span class="tag">Devoirs</span><span class="tag orange">Examens</span><span class="tag">Rattrapage</span>
+        </div>
+      </div>
+      <div class="card">
+        <h3>Supérieur</h3>
+        <p>Stats • Éco • Finance • Comptabilité • Maths • Méthodo (selon cursus)</p>
+        <div class="meta">
+          <span class="tag blue">Univ</span><span class="tag blue">Haute école</span><span class="tag">Partiels</span>
+        </div>
+      </div>
+      <div class="card">
+        <h3>Organisation & méthode</h3>
+        <p>Planification • Fiches • Exercices types • Gestion du temps • Confiance</p>
+        <div class="meta">
+          <span class="tag orange">Méthodo</span><span class="tag">Suivi</span><span class="tag">Objectifs</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="equipe">
+  <div class="container">
+    <h2>L’équipe</h2>
+    <p>3 membres : Bilal, Sami, Walid. Ajoute vos photos dans <code>assets/</code> (noms ci-dessous).</p>
+
+    <div class="team">
+      <div class="card person">
+        <div class="avatar">
+          <img src="assets/team-bilal.jpg" alt="Bilal"
+               onerror="this.style.display='none'; this.parentElement.innerHTML='<span class=&quot;pill&quot;>Photo Bilal</span>';">
+        </div>
+        <div class="name">
+          <strong>Bilal</strong>
+          <span class="role">Co-fondateur</span>
+        </div>
+        <ul>
+          <li>Expérience : tutorat / cours privés</li>
+          <li>Public : secondaire + supérieur</li>
+          <li>Tél/WhatsApp : <b>+32 470 12 34 56</b> (à changer)</li>
+        </ul>
+      </div>
+
+      <div class="card person">
+        <div class="avatar">
+          <img src="assets/team-sami.jpg" alt="Sami"
+               onerror="this.style.display='none'; this.parentElement.innerHTML='<span class=&quot;pill&quot;>Photo Sami</span>';">
+        </div>
+        <div class="name">
+          <strong>Sami</strong>
+          <span class="role">Co-fondateur</span>
+        </div>
+        <ul>
+          <li>Expérience : secondaire / cours privés</li>
+          <li>Objectif : méthode + exercices</li>
+          <li>Tél/WhatsApp : <b>+32 486 55 01 92</b> (à changer)</li>
+        </ul>
+      </div>
+
+      <div class="card person">
+        <div class="avatar">
+          <img src="assets/team-walid.jpg" alt="Walid"
+               onerror="this.style.display='none'; this.parentElement.innerHTML='<span class=&quot;pill&quot;>Photo Walid</span>';">
+        </div>
+        <div class="name">
+          <strong>Walid</strong>
+          <span class="role">Co-fondateur</span>
+        </div>
+        <ul>
+          <li>Expérience : supérieur / coaching</li>
+          <li>Focus : progression & confiance</li>
+          <li>Tél/WhatsApp : <b>+32 499 20 88 73</b> (à changer)</li>
+        </ul>
+      </div>
+    </div>
+
+    <div style="margin-top:16px;display:flex;gap:12px;flex-wrap:wrap">
+      <a class="btn" href="inscription.html">S’inscrire</a>
+      <a class="btn secondary" href="contact.html">Nous contacter</a>
+    </div>
+  </div>
+</section>
+
+<section class="section" style="background:var(--soft);border-top:1px solid var(--border);border-bottom:1px solid var(--border);">
+  <div class="container">
+    <h2>FAQ</h2>
+    <div class="grid-2 faq">
+      <details>
+        <summary>Pourquoi pas de prix affiché pour les cours particuliers ?</summary>
+        <p>Parce que ça dépend du niveau, de la matière, du format (online/domicile/locaux) et de la fréquence. On propose un devis personnalisé après inscription.</p>
+      </details>
+      <details>
+        <summary>Où se déroulent les cours ?</summary>
+        <p>En ligne, à domicile, ou dans des locaux si disponibles. Les groupes se font actuellement via une collaboration avec La Source.</p>
+      </details>
+      <details>
+        <summary>Vous faites le supérieur (univ/haute école) ?</summary>
+        <p>Oui. Indique la matière + programme dans l’inscription : on s’organise et on délègue si besoin.</p>
+      </details>
+      <details>
+        <summary>Combien de temps pour être recontacté ?</summary>
+        <p>Après l’inscription, on vous recontacte rapidement pour confirmer les détails et démarrer.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container footer-grid">
+    <div>
+      <strong style="color:var(--sbs-blue)">BCWbruxelles</strong>
+      <div class="small">Soutien scolaire — secondaire & supérieur</div>
+      <div class="small" style="margin-top:6px;">
+        <!-- ⚠️ Si vous gardez le logo SBS : précisez que vous n’êtes pas affiliés officiellement -->
+        Diplômés Solvay Brussels School (mention alumni)
+      </div>
+    </div>
+
+    <div>
+      <div class="small"><a href="contact.html">Contact</a> • <a href="inscription.html">Inscription</a></div>
+      <div class="small" style="margin-top:6px;">© <span id="year"></span> BCWbruxelles</div>
+    </div>
+  </div>
+</footer>
+
+<!-- Bouton WhatsApp flottant (remplace le numéro) -->
+<a class="float-wa" href="https://wa.me/32470123456" target="_blank" rel="noopener">
+  <span class="dot"></span> WhatsApp
+</a>
+
+<script src="script.js"></script>
 </body>
 </html>

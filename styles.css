@@ -162,9 +162,58 @@ nav a.link.active{color:var(--blue);background:rgba(1,81,153,.08)}
 /* =========================
    HERO (partie haute)
    ========================= */
+/* HERO avec image de fond (desktop + mobile) */
 .hero{
-  background:var(--grad);
+  /* Overlay + couleurs + image (fallback jpg si webp pas supporté) */
+  background:
+    linear-gradient(90deg,
+      rgba(255,255,255,.96) 0%,
+      rgba(255,255,255,.90) 45%,
+      rgba(255,255,255,.70) 70%,
+      rgba(255,255,255,.45) 100%
+    ),
+    radial-gradient(900px 500px at 15% -10%, rgba(1,81,153,.16), transparent 60%),
+    radial-gradient(900px 500px at 85% 0%, rgba(255,157,25,.22), transparent 55%),
+    url("assets/hero-bg.jpg"); /* fallback */
+
+  /* WebP si dispo */
+  background-image:
+    linear-gradient(90deg,
+      rgba(255,255,255,.96) 0%,
+      rgba(255,255,255,.90) 45%,
+      rgba(255,255,255,.70) 70%,
+      rgba(255,255,255,.45) 100%
+    ),
+    radial-gradient(900px 500px at 15% -10%, rgba(1,81,153,.16), transparent 60%),
+    radial-gradient(900px 500px at 85% 0%, rgba(255,157,25,.22), transparent 55%),
+    image-set(
+      url("assets/hero-bg.webp") type("image/webp"),
+      url("assets/hero-bg.jpg") type("image/jpeg")
+    );
+
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
   border-bottom:1px solid var(--border);
+}
+
+/* Version mobile : image plus petite (plus rapide) */
+@media (max-width: 980px){
+  .hero{
+    background-image:
+      linear-gradient(180deg,
+        rgba(255,255,255,.96) 0%,
+        rgba(255,255,255,.88) 55%,
+        rgba(255,255,255,.70) 100%
+      ),
+      radial-gradient(700px 450px at 10% -10%, rgba(1,81,153,.14), transparent 60%),
+      radial-gradient(700px 450px at 90% 0%, rgba(255,157,25,.18), transparent 55%),
+      image-set(
+        url("assets/hero-bg-mobile.webp") type("image/webp"),
+        url("assets/hero-bg-mobile.jpg") type("image/jpeg")
+      );
+  }
 }
 .hero-wrap{
   display:grid;

@@ -149,6 +149,13 @@ const translations = {
       directText:
         "Appelez ou ecrivez via WhatsApp. Remplacez les placeholders par vos numeros.",
       pageLink: "Ouvrir la page contact",
+      signupTitle: "Demande de cours premium",
+      signupText:
+        "Le formulaire complet est centralise sur la page Inscription pour une prise en charge plus rapide et structuree.",
+      signupPoint1: "Formulaire detaille en moins de 2 minutes",
+      signupPoint2: "Analyse rapide de votre besoin",
+      signupPoint3: "Retour avec plan d'accompagnement et devis",
+      signupCta: "Ouvrir l'inscription",
     },
     form: {
       title: "Demande de cours",
@@ -171,6 +178,7 @@ const translations = {
       success: "Merci. Votre demande a bien ete envoyee.",
       honeypot: "Envoi bloque.",
       fallback: "Endpoint indisponible: ouverture de votre messagerie.",
+      invalid: "Veuillez completer les champs obligatoires.",
       mailSubject: "Demande de cours BCW",
     },
     footer: {
@@ -328,6 +336,13 @@ const translations = {
       directTitle: "Direct contact",
       directText: "Bel of stuur via WhatsApp. Vervang de placeholders door jullie nummers.",
       pageLink: "Open contactpagina",
+      signupTitle: "Premium lesaanvraag",
+      signupText:
+        "Het volledige formulier staat op de inschrijvingspagina voor snellere en beter gestructureerde opvolging.",
+      signupPoint1: "Volledig formulier in minder dan 2 minuten",
+      signupPoint2: "Snelle analyse van je behoefte",
+      signupPoint3: "Reactie met begeleidingsplan en offerte",
+      signupCta: "Open inschrijving",
     },
     form: {
       title: "Lesaanvraag",
@@ -350,6 +365,7 @@ const translations = {
       success: "Bedankt. Je aanvraag werd goed verzonden.",
       honeypot: "Verzending geblokkeerd.",
       fallback: "Endpoint niet beschikbaar: je e-mailapp wordt geopend.",
+      invalid: "Vul de verplichte velden in.",
       mailSubject: "BCW lesaanvraag",
     },
     footer: {
@@ -473,13 +489,34 @@ function messageForCurrentLanguage(key) {
   return typeof value === "string" ? value : "";
 }
 
+function setFormStatus(message, type = "info") {
+  if (!formStatus) {
+    return;
+  }
+  formStatus.textContent = message;
+  formStatus.classList.remove("is-info", "is-success", "is-error");
+  if (type === "success") {
+    formStatus.classList.add("is-success");
+  } else if (type === "error") {
+    formStatus.classList.add("is-error");
+  } else {
+    formStatus.classList.add("is-info");
+  }
+}
+
 if (contactForm && formStatus) {
   contactForm.addEventListener("submit", async (event) => {
     event.preventDefault();
 
+    if (!contactForm.checkValidity()) {
+      contactForm.reportValidity();
+      setFormStatus(messageForCurrentLanguage("form.invalid"), "error");
+      return;
+    }
+
     const honeypotField = contactForm.querySelector('input[name="website"]');
     if (honeypotField && honeypotField.value.trim()) {
-      formStatus.textContent = messageForCurrentLanguage("form.honeypot");
+      setFormStatus(messageForCurrentLanguage("form.honeypot"), "error");
       return;
     }
 
@@ -492,7 +529,9 @@ if (contactForm && formStatus) {
     if (submitButton) {
       submitButton.disabled = true;
       submitButton.textContent = messageForCurrentLanguage("form.sending");
+      submitButton.setAttribute("aria-busy", "true");
     }
+    setFormStatus(messageForCurrentLanguage("form.sending"), "info");
 
     try {
       const response = await fetch("/api/leads", {
@@ -507,7 +546,7 @@ if (contactForm && formStatus) {
         throw new Error("Endpoint unavailable");
       }
 
-      formStatus.textContent = messageForCurrentLanguage("form.success");
+      setFormStatus(messageForCurrentLanguage("form.success"), "success");
       contactForm.reset();
     } catch (error) {
       const subject = encodeURIComponent(messageForCurrentLanguage("form.mailSubject") || "BCW");
@@ -521,10 +560,11 @@ if (contactForm && formStatus) {
       ];
       const body = encodeURIComponent(lines.join("\n"));
       window.location.href = `mailto:contact@bcwbruxelles.com?subject=${subject}&body=${body}`;
-      formStatus.textContent = messageForCurrentLanguage("form.fallback");
+      setFormStatus(messageForCurrentLanguage("form.fallback"), "info");
     } finally {
       if (submitButton) {
         submitButton.disabled = false;
+        submitButton.removeAttribute("aria-busy");
         if (submitButton.hasAttribute("data-i18n")) {
           applyTranslations(getStoredLanguage());
         } else {

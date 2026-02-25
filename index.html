@@ -272,48 +272,15 @@
             <a class="btn btn-secondary" href="contact.html" data-i18n="contact.pageLink">Ouvrir la page contact</a>
           </article>
 
-          <article class="contact-card contact-form-card">
-            <h3 data-i18n="form.title">Demande de cours</h3>
-            <form id="contact-form" novalidate>
-              <div class="hp-field" aria-hidden="true">
-                <label for="website">Website</label>
-                <input type="text" id="website" name="website" tabindex="-1" autocomplete="off" />
-              </div>
-
-              <div class="form-grid">
-                <label>
-                  <span data-i18n="form.nameLabel">Nom</span>
-                  <input type="text" name="name" required data-i18n-placeholder="form.namePlaceholder" placeholder="Votre nom" />
-                </label>
-                <label>
-                  <span data-i18n="form.emailLabel">Email</span>
-                  <input type="email" name="email" required data-i18n-placeholder="form.emailPlaceholder" placeholder="vous@email.com" />
-                </label>
-                <label>
-                  <span data-i18n="form.phoneLabel">Telephone</span>
-                  <input type="tel" name="phone" required data-i18n-placeholder="form.phonePlaceholder" placeholder="+32 ..." />
-                </label>
-                <label>
-                  <span data-i18n="form.levelLabel">Niveau</span>
-                  <select name="level" required>
-                    <option value="" data-i18n="form.levelPlaceholder">Selectionnez un niveau</option>
-                    <option value="Secondaire" data-i18n="form.levelSecondary">Secondaire</option>
-                    <option value="Enseignement superieur" data-i18n="form.levelHigher">Enseignement superieur</option>
-                  </select>
-                </label>
-                <label>
-                  <span data-i18n="form.subjectLabel">Matiere</span>
-                  <input type="text" name="subject" required data-i18n-placeholder="form.subjectPlaceholder" placeholder="Ex: mathematiques" />
-                </label>
-                <label class="full-width">
-                  <span data-i18n="form.messageLabel">Message</span>
-                  <textarea name="message" rows="5" required data-i18n-placeholder="form.messagePlaceholder" placeholder="Contexte, disponibilites, objectif..."></textarea>
-                </label>
-              </div>
-
-              <button class="btn" type="submit" data-i18n="form.submit">Envoyer la demande</button>
-              <p id="form-status" role="status" aria-live="polite"></p>
-            </form>
+          <article class="contact-card contact-signup-card">
+            <h3 data-i18n="contact.signupTitle">Demande de cours premium</h3>
+            <p data-i18n="contact.signupText">Le formulaire complet est centralise sur la page Inscription pour une prise en charge plus rapide et structurée.</p>
+            <ul class="contact-list">
+              <li data-i18n="contact.signupPoint1">Formulaire detaille en moins de 2 minutes</li>
+              <li data-i18n="contact.signupPoint2">Analyse rapide de votre besoin</li>
+              <li data-i18n="contact.signupPoint3">Retour avec plan d'accompagnement et devis</li>
+            </ul>
+            <a class="btn" href="inscription.html" data-i18n="contact.signupCta">Ouvrir l'inscription</a>
           </article>
         </div>
       </div>

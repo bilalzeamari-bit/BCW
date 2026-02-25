@@ -4,13 +4,11 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  <title>Inscription — BCWbruxelles</title>
-  <meta name="description" content="Inscription BCWbruxelles : secondaire &amp; supérieur. Demande de devis." />
+  <title>Inscription - BCW Bruxelles</title>
+  <meta name="description" content="Demande de cours BCW Bruxelles pour le secondaire et l'enseignement supérieur." />
 
-  <!-- ✅ Favicon -->
-  <link rel="icon" href="assets/favicon.png" type="image/png">
-  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
-  <meta name="theme-color" content="#FF9D19">
+  <link rel="icon" href="assets/favicon.png" type="image/png" />
+  <meta name="theme-color" content="#0B2B53" />
 
   <link rel="stylesheet" href="styles.css" />
 </head>
@@ -18,99 +16,171 @@
 
 <header>
   <div class="container navbar">
-    <a class="brand" href="index.html">
+    <a class="brand" href="index.html" aria-label="BCW Bruxelles accueil">
       <div class="brand-logo">
-        <img src="assets/logo-bcw.png" alt="Logo BCWbruxelles">
+        <img src="assets/logo-bcw.png" alt="Logo BCW Bruxelles" />
       </div>
       <div class="brand-title">
-        <strong>BCWbruxelles</strong>
+        <strong>BCW Bruxelles</strong>
         <span>Inscription</span>
       </div>
     </a>
 
     <nav>
-      <button class="burger" aria-label="Ouvrir le menu" aria-expanded="false">
+      <button class="burger" type="button" aria-label="Ouvrir le menu" aria-expanded="false">
         <span></span><span></span><span></span>
       </button>
       <ul>
-        <li><a class="link" href="index.html#offre">Offres</a></li>
-        <li><a class="link" href="index.html#matieres">Matières</a></li>
-        <li><a class="link" href="index.html#methode">Équipe</a></li>
+        <li><a class="link" href="index.html#offre">Offre</a></li>
+        <li><a class="link" href="index.html#matieres">Matieres</a></li>
+        <li><a class="link" href="index.html#methode">Methode</a></li>
         <li><a class="link" href="contact.html">Contact</a></li>
-        <li><a class="btn" href="inscription.html">S’inscrire</a></li>
+        <li><a class="btn btn-nav" href="inscription.html">S'inscrire</a></li>
       </ul>
     </nav>
   </div>
 </header>
 
-<section class="section">
-  <div class="container">
-    <h2>Inscription / Demande de devis</h2>
-    <p>Remplis le formulaire (2 minutes). On te recontacte rapidement avec un format et un devis personnalisés.</p>
+<main>
+  <section class="section signup-section">
+    <div class="container">
+      <div class="signup-hero">
+        <span class="signup-kicker">Demande de cours BCW</span>
+        <h1>Inscription</h1>
+        <p>Un formulaire unique, clair et structuré pour organiser rapidement votre accompagnement.</p>
+      </div>
 
-    <div class="form-wrap">
-      <form id="contact-form" novalidate>
-        <div class="hp-field" aria-hidden="true">
-          <label for="website">Website</label>
-          <input type="text" id="website" name="website" tabindex="-1" autocomplete="off" />
-        </div>
+      <div class="enrollment-layout">
+        <aside class="enrollment-aside card">
+          <h2>Pourquoi passer par cette page</h2>
+          <p>Nous centralisons ici toutes les demandes pour garantir une reponse rapide et un suivi premium.</p>
 
-        <div class="form-grid">
-          <label>
-            <span>Nom</span>
-            <input type="text" name="name" required placeholder="Votre nom" />
-          </label>
-          <label>
-            <span>Email</span>
-            <input type="email" name="email" required placeholder="vous@email.com" />
-          </label>
-          <label>
-            <span>Téléphone</span>
-            <input type="tel" name="phone" required placeholder="+32 ..." />
-          </label>
-          <label>
-            <span>Niveau</span>
-            <select name="level" required>
-              <option value="">Sélectionnez un niveau</option>
-              <option value="Secondaire">Secondaire</option>
-              <option value="Enseignement supérieur">Enseignement supérieur</option>
-            </select>
-          </label>
-          <label>
-            <span>Matière</span>
-            <input type="text" name="subject" required placeholder="Ex: mathématiques" />
-          </label>
-          <label class="full-width">
-            <span>Message</span>
-            <textarea name="message" rows="5" required placeholder="Contexte, disponibilités, objectif..."></textarea>
-          </label>
-        </div>
+          <ol class="enrollment-steps">
+            <li>
+              <strong>1. Diagnostic</strong>
+              <span>Nous analysons votre niveau, la matiere et l'objectif.</span>
+            </li>
+            <li>
+              <strong>2. Proposition</strong>
+              <span>Nous revenons avec format, rythme et organisation recommandee.</span>
+            </li>
+            <li>
+              <strong>3. Demarrage</strong>
+              <span>Premiere seance planifiee rapidement selon vos disponibilites.</span>
+            </li>
+          </ol>
 
-        <button class="btn" type="submit">Envoyer la demande</button>
-        <p id="form-status" role="status" aria-live="polite"></p>
-      </form>
+          <div class="enrollment-trust">
+            <span class="tag blue">Equipe Solvay Brussels School</span>
+            <span class="tag">Bruxelles - En ligne - A domicile</span>
+            <span class="tag orange">Reponse sous 24h ouvrables</span>
+          </div>
+
+          <div class="enrollment-phones">
+            <h3>Contact direct</h3>
+            <p>Bilal: <a href="tel:xxx">xxx</a></p>
+            <p>Sami: <a href="tel:xxx">xxx</a></p>
+            <p>Walid: <a href="tel:xxx">xxx</a></p>
+          </div>
+        </aside>
+
+        <article class="enrollment-form-wrap">
+          <form id="contact-form" class="premium-form" novalidate>
+            <div class="hp-field" aria-hidden="true">
+              <label for="website">Website</label>
+              <input type="text" id="website" name="website" tabindex="-1" autocomplete="off" />
+            </div>
+
+            <fieldset>
+              <legend>Coordonnees</legend>
+              <div class="form-grid">
+                <label>
+                  <span>Nom</span>
+                  <input type="text" name="name" required placeholder="Votre nom" autocomplete="name" />
+                </label>
+                <label>
+                  <span>Email</span>
+                  <input type="email" name="email" required placeholder="vous@email.com" autocomplete="email" />
+                </label>
+                <label>
+                  <span>Telephone</span>
+                  <input type="tel" name="phone" required placeholder="+32 ..." autocomplete="tel" />
+                </label>
+                <label>
+                  <span>Matiere</span>
+                  <input type="text" name="subject" required placeholder="Ex: mathematiques" />
+                </label>
+              </div>
+            </fieldset>
+
+            <fieldset>
+              <legend>Cadre academique</legend>
+              <div class="form-grid">
+                <label>
+                  <span>Niveau</span>
+                  <select name="level" required>
+                    <option value="">Selectionnez un niveau</option>
+                    <option value="Secondaire">Secondaire</option>
+                    <option value="Enseignement superieur">Enseignement superieur</option>
+                  </select>
+                </label>
+                <label>
+                  <span>Format souhaite</span>
+                  <select name="format" required>
+                    <option value="">Selectionnez un format</option>
+                    <option value="Bruxelles">Bruxelles</option>
+                    <option value="En ligne">En ligne</option>
+                    <option value="A domicile">A domicile</option>
+                  </select>
+                </label>
+                <label>
+                  <span>Priorite</span>
+                  <select name="urgency" required>
+                    <option value="">Selectionnez</option>
+                    <option value="Standard">Standard (sous 24h)</option>
+                    <option value="Urgent">Urgent (besoin rapide)</option>
+                  </select>
+                </label>
+              </div>
+            </fieldset>
+
+            <fieldset>
+              <legend>Objectif</legend>
+              <div class="form-grid">
+                <label class="full-width">
+                  <span>Message</span>
+                  <textarea name="message" rows="6" required placeholder="Contexte, disponibilites, objectif, epreuves a preparer..."></textarea>
+                </label>
+              </div>
+            </fieldset>
+
+            <div class="premium-form-actions">
+              <button class="btn" type="submit">Envoyer la demande</button>
+              <p class="small">En envoyant ce formulaire, vous acceptez d'etre recontacte par BCW Bruxelles.</p>
+            </div>
+            <p id="form-status" role="status" aria-live="polite"></p>
+          </form>
+        </article>
+      </div>
     </div>
-
-    <p class="small" style="margin-top:12px;">En envoyant ce formulaire, vous acceptez d’être recontacté par BCWbruxelles.</p>
-  </div>
-</section>
+  </section>
+</main>
 
 <footer>
   <div class="container footer-grid">
     <div>
-      <strong style="color:var(--blue)">BCWbruxelles</strong>
-      <div class="small">Secondaire • Enseignement supérieur</div>
+      <strong>BCW Bruxelles</strong>
+      <div class="small">Secondaire - Enseignement superieur</div>
     </div>
     <div class="small">
-      <a href="index.html">Accueil</a> • <a href="contact.html">Contact</a>
-      <div style="margin-top:6px;">© <span id="year"></span> BCWbruxelles</div>
+      <a href="index.html">Accueil</a> - <a href="contact.html">Contact</a>
+      <div style="margin-top:6px;">© <span id="year"></span> BCW Bruxelles</div>
     </div>
   </div>
 </footer>
 
-<!-- ✅ CTA mobile -->
 <div class="mobile-cta">
-  <a class="btn" href="inscription.html">S’inscrire</a>
+  <a class="btn" href="inscription.html">S'inscrire</a>
   <a class="btn secondary" href="contact.html">Contact</a>
 </div>
 

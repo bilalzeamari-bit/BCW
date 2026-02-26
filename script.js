@@ -147,7 +147,7 @@ const translations = {
         "Decrivez votre besoin. Nous revenons vers vous avec un plan et un devis personnalise.",
       directTitle: "Contact direct",
       directText:
-        "Appelez ou ecrivez via WhatsApp. Remplacez les placeholders par vos numeros.",
+        "Appelez-nous ou ecrivez-nous sur Instagram/Facebook.",
       pageLink: "Ouvrir la page contact",
       signupTitle: "Demande de cours premium",
       signupText:
@@ -335,7 +335,7 @@ const translations = {
       subtitle:
         "Beschrijf je noden. We komen bij je terug met een plan en een offerte op maat.",
       directTitle: "Direct contact",
-      directText: "Bel of stuur via WhatsApp. Vervang de placeholders door jullie nummers.",
+      directText: "Bel ons of stuur ons een bericht via Instagram/Facebook.",
       pageLink: "Open contactpagina",
       signupTitle: "Premium lesaanvraag",
       signupText:

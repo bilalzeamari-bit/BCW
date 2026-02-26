@@ -1,4 +1,5 @@
 (() => {
+  const header = document.querySelector("header");
   const burger = document.querySelector(".burger");
   const nav = document.querySelector("header nav");
   const year = document.getElementById("year");
@@ -37,6 +38,13 @@
       }
     });
   });
+
+  function syncHeaderState() {
+    if (!header) {
+      return;
+    }
+    header.classList.toggle("is-scrolled", window.scrollY > 10);
+  }
 
   function initRevealAnimation() {
     if (!window.IntersectionObserver) {
@@ -158,4 +166,6 @@
 
   initHeroRotator();
   initRevealAnimation();
+  syncHeaderState();
+  window.addEventListener("scroll", syncHeaderState, { passive: true });
 })();

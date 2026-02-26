@@ -179,6 +179,7 @@ const translations = {
       honeypot: "Envoi bloque.",
       fallback: "Erreur d'envoi. Verifiez la configuration Supabase (table/policy) puis reessayez.",
       invalid: "Veuillez completer les champs obligatoires.",
+      messageTooShort: "Le message doit contenir au moins 10 caracteres.",
       mailSubject: "Demande de cours BCW",
     },
     footer: {
@@ -366,6 +367,7 @@ const translations = {
       honeypot: "Verzending geblokkeerd.",
       fallback: "Verzendfout. Controleer de Supabase-configuratie (tabel/policy) en probeer opnieuw.",
       invalid: "Vul de verplichte velden in.",
+      messageTooShort: "Je bericht moet minstens 10 tekens bevatten.",
       mailSubject: "BCW lesaanvraag",
     },
     footer: {
@@ -576,7 +578,12 @@ if (contactForm && formStatus) {
       }, 650);
     } catch (error) {
       console.error(error);
-      setFormStatus(messageForCurrentLanguage("form.fallback"), "error");
+      const errorText = String(error?.message || error || "");
+      if (errorText.includes("leads_message_check")) {
+        setFormStatus(messageForCurrentLanguage("form.messageTooShort"), "error");
+      } else {
+        setFormStatus(messageForCurrentLanguage("form.fallback"), "error");
+      }
     } finally {
       if (submitButton) {
         submitButton.disabled = false;
